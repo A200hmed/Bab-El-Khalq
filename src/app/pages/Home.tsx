@@ -202,12 +202,12 @@ export default function Home() {
           <footer className="mt-24 text-center py-16 border-t border-[#D4AF37]/10">
             {/* Company Logo */}
             <div className="mb-8 flex justify-center">
-              <div className="p-6 bg-[#181513] rounded-full border-2 border-[#ff4444]/30 shadow-[0_0_40px_rgba(255,68,68,0.15)]">
-                {/* Wanwir Logo SVG (Corrected for RTL) */}
-                <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="50" cy="50" r="45" stroke="#ff4444" strokeWidth="4" fill="#181513"/>
-                  <path d="M75 75 L60 40 L50 60 L40 40 L25 75" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                  <path d="M60 40 L50 55 L40 40" stroke="#ff4444" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              <div className="p-6 bg-[#12100E] rounded-full border-2 border-[#ff4444] shadow-[0_0_40px_rgba(255,68,68,0.2)]">
+                {/* Wanwir Logo SVG (Exact Match) */}
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="46" stroke="#ff4444" strokeWidth="4" fill="#12100E"/>
+                  <path d="M20 75 L35 35 L50 60 L65 35 L80 75" stroke="white" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                  <path d="M35 35 L50 52 L65 35" stroke="#ff4444" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                 </svg>
               </div>
             </div>
