@@ -203,11 +203,11 @@ export default function Home() {
             {/* Company Logo */}
             <div className="mb-8 flex justify-center">
               <div className="p-6 bg-[#181513] rounded-full border-2 border-[#ff4444]/30 shadow-[0_0_40px_rgba(255,68,68,0.15)]">
-                {/* Wanwir Logo SVG */}
+                {/* Wanwir Logo SVG (Corrected for RTL) */}
                 <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="50" cy="50" r="45" stroke="#ff4444" strokeWidth="4" fill="#181513"/>
-                  <path d="M25 75 L40 40 L50 60 L60 40 L75 75" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                  <path d="M40 40 L50 55 L60 40" stroke="#ff4444" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                  <path d="M75 75 L60 40 L50 60 L40 40 L25 75" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                  <path d="M60 40 L50 55 L40 40" stroke="#ff4444" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                 </svg>
               </div>
             </div>
