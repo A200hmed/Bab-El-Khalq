@@ -1,0 +1,48 @@
+export const initialProducts = [
+  // ☕ مشروبات ساخنة
+  { id: "1", name: "قهوة سادة", price: 20, category: "قهوة ساخنة", description: "قهوة عربية سادة", available: true, ingredients: ["قهوة", "ماء"] },
+  { id: "2", name: "قهوة مظبوط", price: 25, category: "قهوة ساخنة", description: "قهوة عربية مع السكر", available: true, ingredients: ["قهوة", "ماء", "سكر"] },
+  { id: "3", name: "قهوة زيادة", price: 30, category: "قهوة ساخنة", description: "قهوة عربية مع زيادة قهوة", available: true, ingredients: ["قهوة زيادة", "ماء", "سكر"] },
+  { id: "4", name: "قهوة بندق", price: 40, category: "قهوة ساخنة", description: "قهوة عطرية بنكهة البندق", available: true, ingredients: ["قهوة", "حليب", "شراب البندق"] },
+  { id: "5", name: "قهوة فرنساوي", price: 35, category: "قهوة ساخنة", description: "قهوة فرنسية كلاسيكية", available: true, ingredients: ["قهوة مطحونة", "ماء ساخن"] },
+  { id: "6", name: "إسبريسو", price: 30, category: "قهوة ساخنة", description: "قهوة إسبريسو إيطالية قوية ومركزة", available: true, ingredients: ["قهوة إسبريسو"] },
+  { id: "7", name: "كابتشينو", price: 40, category: "قهوة ساخنة", description: "قهوة كابتشينو مع رغوة الحليب الكريمية", available: true, ingredients: ["قهوة إسبريسو", "حليب", "رغوة حليب"] },
+  { id: "8", name: "لاتيه", price: 40, category: "قهوة ساخنة", description: "قهوة لاتيه بالحليب الساخن", available: true, ingredients: ["قهوة إسبريسو", "حليب ساخن"] },
+  { id: "9", name: "موكا", price: 45, category: "قهوة ساخنة", description: "قهوة موكا بالشوكولاتة الفاخرة", available: true, ingredients: ["قهوة إسبريسو", "شوكولاتة", "حليب"] },
+  { id: "10", name: "هوت شوكليت", price: 35, category: "قهوة ساخنة", description: "شوكولاتة ساخنة غنية وكريمية", available: true, ingredients: ["شوكولاتة داكنة", "حليب", "سكر"] },
+  { id: "11", name: "سحلب", price: 30, category: "قهوة ساخنة", description: "سحلب تقليدي مع كريمة", available: true, ingredients: ["مسحلب", "حليب", "سكر", "قرفة"] },
+
+  // 🍵 شاي ومشروبات عشبية
+  { id: "12", name: "شاي أحمر", price: 15, category: "شاي ومشروبات عشبية", description: "شاي أحمر عربي أصيل", available: true, ingredients: ["شاي أحمر", "ماء", "سكر"] },
+  { id: "13", name: "شاي أخضر", price: 20, category: "شاي ومشروبات عشبية", description: "شاي أخضر صحي ومفيد", available: true, ingredients: ["شاي أخضر", "ماء", "عسل"] },
+  { id: "14", name: "شاي بالنعناع", price: 18, category: "شاي ومشروبات عشبية", description: "شاي منعش مع نعناع طازج", available: true, ingredients: ["شاي أحمر", "نعناع طازج", "ماء", "سكر"] },
+  { id: "15", name: "ينسون", price: 18, category: "شاي ومشروبات عشبية", description: "مشروب ينسون مهدئ", available: true, ingredients: ["ينسون", "ماء ساخن"] },
+  { id: "16", name: "كركديه", price: 20, category: "شاي ومشروبات عشبية", description: "مشروب كركديه منعش", available: true, ingredients: ["كركديه", "ماء", "سكر"] },
+  { id: "17", name: "نعناع", price: 15, category: "شاي ومشروبات عشبية", description: "مشروب نعناع طازج", available: true, ingredients: ["نعناع طازج", "ماء", "سكر"] },
+  { id: "18", name: "قرفة", price: 18, category: "شاي ومشروبات عشبية", description: "مشروب قرفة دافئ", available: true, ingredients: ["قرفة", "ماء ساخن", "عسل"] },
+  { id: "19", name: "حلبة", price: 18, category: "شاي ومشروبات عشبية", description: "مشروب حلبة مفيد", available: true, ingredients: ["حلبة", "ماء ساخن"] },
+  { id: "20", name: "زنجبيل", price: 20, category: "شاي ومشروبات عشبية", description: "مشروب زنجبيل دافئ ومفيد", available: true, ingredients: ["زنجبيل طازج", "ماء", "عسل"] },
+
+  // 🧊 مشروبات باردة
+  { id: "21", name: "آيس كوفي", price: 40, category: "مشروبات باردة", description: "قهوة باردة كلاسيكية", available: true, ingredients: ["قهوة", "ثلج", "سكر"] },
+  { id: "22", name: "آيس لاتيه", price: 45, category: "مشروبات باردة", description: "لاتيه بارد منعش مع الثلج", available: true, ingredients: ["قهوة إسبريسو", "حليب بارد", "ثلج"] },
+  { id: "23", name: "آيس موكا", price: 50, category: "مشروبات باردة", description: "موكا بارد بالشوكولاتة والثلج", available: true, ingredients: ["قهوة إسبريسو", "شوكولاتة", "حليب", "ثلج"] },
+  { id: "24", name: "فرابيه", price: 50, category: "مشروبات باردة", description: "فرابيه مثلج ومميز", available: true, ingredients: ["قهوة", "حليب", "ثلج", "سكر", "كريمة"] },
+  { id: "25", name: "ميلك شيك", price: 45, category: "مشروبات باردة", description: "ميلك شيك كريمي", available: true, ingredients: ["حليب", "آيس كريم", "سكر"] },
+
+  // 🍹 عصائر فريش
+  { id: "26", name: "مانجو", price: 40, category: "عصائر فريش", description: "عصير مانجو طازج طبيعي", available: true, ingredients: ["مانجو طازج"] },
+  { id: "27", name: "فراولة", price: 40, category: "عصائر فريش", description: "عصير فراولة طازج", available: true, ingredients: ["فراولة طازجة"] },
+  { id: "28", name: "برتقال", price: 35, category: "عصائر فريش", description: "عصير برتقال طازج طبيعي 100%", available: true, ingredients: ["برتقال طازج"] },
+  { id: "29", name: "جوافة", price: 40, category: "عصائر فريش", description: "عصير جوافة طازج ومميز", available: true, ingredients: ["جوافة طازجة"] },
+  { id: "30", name: "كوكتيل", price: 45, category: "عصائر فريش", description: "عصير كوكتيل من الفواكه المتنوعة", available: true, ingredients: ["مانجو", "فراولة", "برتقال", "موز"] },
+  { id: "31", name: "ليمون", price: 30, category: "عصائر فريش", description: "عصير ليمون منعش", available: true, ingredients: ["ليمون طازج", "ماء", "سكر"] },
+  { id: "32", name: "ليمون نعناع", price: 30, category: "عصائر فريش", description: "مشروب ليمون بالنعناع منعش", available: true, ingredients: ["ليمون", "نعناع", "ماء", "سكر"] },
+
+  // 🥤 مشروبات غازية ومياه
+  { id: "33", name: "كوكاكولا", price: 15, category: "مشروبات غازية ومياه", description: "كوكاكولا كلاسيكية", available: true, ingredients: [] },
+  { id: "34", name: "سفن أب", price: 15, category: "مشروبات غازية ومياه", description: "سفن أب كلاسيكي", available: true, ingredients: [] },
+  { id: "35", name: "سبرايت", price: 15, category: "مشروبات غازية ومياه", description: "سبرايت منعش", available: true, ingredients: [] },
+  { id: "36", name: "فيروز", price: 15, category: "مشروبات غازية ومياه", description: "مشروب فيروز", available: true, ingredients: [] },
+  { id: "37", name: "مياه معدنية", price: 10, category: "مشروبات غازية ومياه", description: "مياه معدنية نقية", available: true, ingredients: [] },
+];
