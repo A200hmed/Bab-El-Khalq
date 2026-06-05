@@ -200,11 +200,18 @@ export default function Home() {
         {/* Footer */}
         <AnimatedSection delay={0.8}>
           <footer className="mt-24 text-center py-16 border-t border-[#D4AF37]/10">
-            <div className="mb-6 flex justify-center gap-4 text-[#D4AF37]/40">
-              {[0, 1, 2, 3, 4].map(i => (
-                <div key={i} className="w-2 h-2 rounded-full bg-[#D4AF37]"></div>
-              ))}
+            {/* Company Logo */}
+            <div className="mb-8 flex justify-center">
+              <div className="p-6 bg-[#181513] rounded-full border-2 border-[#ff4444]/30 shadow-[0_0_40px_rgba(255,68,68,0.15)]">
+                {/* Wanwir Logo SVG */}
+                <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="#ff4444" strokeWidth="4" fill="#181513"/>
+                  <path d="M25 75 L40 40 L50 60 L60 40 L75 75" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                  <path d="M40 40 L50 55 L60 40" stroke="#ff4444" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                </svg>
+              </div>
             </div>
+
             <p className="text-[#FDF8F3]/60 tracking-[0.1em] text-base mb-2">
               إنتاج وتصميم المهندس أحمد شعلان
             </p>
