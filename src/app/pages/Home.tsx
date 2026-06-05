@@ -202,12 +202,17 @@ export default function Home() {
           <footer className="mt-24 text-center py-16 border-t border-[#D4AF37]/10">
             {/* Company Logo */}
             <div className="mb-8 flex justify-center">
-              <div className="p-6 bg-[#12100E] rounded-full border-2 border-[#ff4444] shadow-[0_0_40px_rgba(255,68,68,0.2)]">
-                {/* Wanwir Logo SVG (Exact Match) */}
-                <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="50" cy="50" r="46" stroke="#ff4444" strokeWidth="4" fill="#12100E"/>
-                  <path d="M20 75 L35 35 L50 60 L65 35 L80 75" stroke="white" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                  <path d="M35 35 L50 52 L65 35" stroke="#ff4444" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              <div className="p-4 bg-[#12100E] rounded-full shadow-[0_0_40px_rgba(255,68,68,0.3)]">
+                {/* Wanwir Logo SVG (Exact Match from User Image with W) */}
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Outer Circle */}
+                  <circle cx="50" cy="50" r="48" stroke="#ff4444" strokeWidth="4" fill="#12100E"/>
+                  {/* Inner Circle */}
+                  <circle cx="50" cy="50" r="32" stroke="#ff4444" strokeWidth="4" fill="none"/>
+                  {/* W Shape (White) */}
+                  <path d="M28 40 L38 70 L50 50 L62 70 L72 40" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                  {/* Red Middle Part */}
+                  <path d="M38 70 L50 58 L62 70" stroke="#ff4444" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                 </svg>
               </div>
             </div>
@@ -221,12 +226,7 @@ export default function Home() {
             <p className="text-[#D4AF37] tracking-[0.1em] text-sm mb-4">
               رقم التواصل: 01005058038
             </p>
-            <p className="text-[#FDF8F3]/40 tracking-[0.2em] text-sm uppercase mb-2">
-              للطلب، يرجى الاتصال بالنادل أو مسح رمز QR الموجود على الطاولة
-            </p>
-            <p className="text-[#D4AF37]/30 text-xs mt-4 tracking-[0.3em]">
-              باب الخلق © 2025
-            </p>
+            
           </footer>
         </AnimatedSection>
       </main>
