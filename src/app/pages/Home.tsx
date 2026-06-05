@@ -199,13 +199,22 @@ export default function Home() {
 
         {/* Footer */}
         <AnimatedSection delay={0.8}>
-          <footer className="mt-24 text-center py-12 border-t border-[#D4AF37]/10">
+          <footer className="mt-24 text-center py-16 border-t border-[#D4AF37]/10">
             <div className="mb-6 flex justify-center gap-4 text-[#D4AF37]/40">
               {[0, 1, 2, 3, 4].map(i => (
                 <div key={i} className="w-2 h-2 rounded-full bg-[#D4AF37]"></div>
               ))}
             </div>
-            <p className="text-[#FDF8F3]/40 tracking-[0.2em] text-sm uppercase">
+            <p className="text-[#FDF8F3]/60 tracking-[0.1em] text-base mb-2">
+              إنتاج وتصميم المهندس أحمد شعلان
+            </p>
+            <p className="text-[#FDF8F3]/50 tracking-[0.1em] text-sm mb-2">
+              مؤسس شركة Wanwir
+            </p>
+            <p className="text-[#D4AF37] tracking-[0.1em] text-sm mb-4">
+              رقم التواصل: 01005058038
+            </p>
+            <p className="text-[#FDF8F3]/40 tracking-[0.2em] text-sm uppercase mb-2">
               للطلب، يرجى الاتصال بالنادل أو مسح رمز QR الموجود على الطاولة
             </p>
             <p className="text-[#D4AF37]/30 text-xs mt-4 tracking-[0.3em]">
