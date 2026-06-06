@@ -1,41 +1,86 @@
 import { createClient } from '@supabase/supabase-js';
 import { projectId, publicAnonKey } from '/utils/supabase/info';
 import { initialProducts } from './data/initialProducts';
+import initSqlJs, { Database } from 'sql.js';
 
-// ================== LOCAL STORAGE API (Primary) ==================
-const LS_KEY = 'cafe-menu-products';
+let db: Database | null = null;
+const SQLITE_LS_KEY = 'cafe-menu-sqlite';
 
-// Helper to get products from localStorage
-const getLocalProducts = (): any[] => {
-  const stored = localStorage.getItem(LS_KEY);
-  if (stored) {
+// Initialize SQLite database
+async function initDatabase() {
+  if (db) return db;
+
+  // Load sql.js
+  const SQL = await initSqlJs({
+    locateFile: (file) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}`
+  });
+
+  // Try to load from localStorage
+  let buf: Uint8Array | undefined;
+  const savedDb = localStorage.getItem(SQLITE_LS_KEY);
+  if (savedDb) {
     try {
-      const parsed = JSON.parse(stored);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        // Ensure all products have an id
-        const withIds = parsed.map((p, index) => ({
-          ...p,
-          id: p.id || `fallback-${index}-${Date.now()}`
-        }));
-        // Save back if any ids were added
-        if (withIds.some((p, i) => p.id !== parsed[i].id)) {
-          localStorage.setItem(LS_KEY, JSON.stringify(withIds));
-        }
-        return withIds;
-      }
+      buf = new Uint8Array(JSON.parse(savedDb));
     } catch (e) {
-      console.error('Failed to parse local products', e);
+      console.error('Failed to load saved DB', e);
     }
   }
-  // Initialize with initial products that already have ids
-  localStorage.setItem(LS_KEY, JSON.stringify(initialProducts));
-  return initialProducts;
-};
 
-// Helper to save products to localStorage
-const saveLocalProducts = (products: any[]) => {
-  localStorage.setItem(LS_KEY, JSON.stringify(products));
-};
+  // Create or load database
+  db = new SQL.Database(buf);
+
+  // Create products table if not exists
+  db.run(`
+    CREATE TABLE IF NOT EXISTS products (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      description TEXT,
+      price REAL NOT NULL,
+      category TEXT NOT NULL,
+      image TEXT,
+      available INTEGER DEFAULT 1,
+      ingredients TEXT,
+      created_at INTEGER DEFAULT (strftime('%s', 'now'))
+    )
+  `);
+
+  // Check if products exist
+  const countResult = db.exec('SELECT COUNT(*) as count FROM products');
+  const count = countResult[0]?.values[0]?.[0] as number;
+
+  if (count === 0) {
+    // Insert initial products
+    const insertStmt = db.prepare(`
+      INSERT INTO products (id, name, description, price, category, image, available, ingredients)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+
+    for (const product of initialProducts) {
+      insertStmt.run([
+        product.id,
+        product.name,
+        product.description || null,
+        product.price,
+        product.category,
+        product.image || null,
+        product.available ? 1 : 0,
+        product.ingredients ? JSON.stringify(product.ingredients) : null
+      ]);
+    }
+
+    insertStmt.free();
+    saveDatabase();
+  }
+
+  return db;
+}
+
+// Save database to localStorage
+function saveDatabase() {
+  if (!db) return;
+  const data = db.export();
+  localStorage.setItem(SQLITE_LS_KEY, JSON.stringify(Array.from(data)));
+}
 
 // ================== SUPABASE API (Fallback, disabled for now) ==================
 const API_BASE = `https://${projectId}.supabase.co/functions/v1/make-server-69dd17e9`;
@@ -47,13 +92,11 @@ export const supabase = createClient(
 
 // ============== AUTH API (Disabled, use simple auth) ==============
 export const signUp = async (email: string, password: string, name: string) => {
-  // For demo, just store a fake session
   localStorage.setItem('cafe-menu-auth', JSON.stringify({ email, name }));
   return { user: { email, name } };
 };
 
 export const signIn = async (email: string, password: string) => {
-  // Demo sign in - accept any email/password
   localStorage.setItem('cafe-menu-auth', JSON.stringify({ email }));
   return { user: { email } };
 };
@@ -70,44 +113,110 @@ export const getSession = async () => {
   return null;
 };
 
-// ============== PRODUCTS API (Use Local Storage) ==============
+// ============== PRODUCTS API (SQLite) ==============
 
 export const getProducts = async () => {
-  return getLocalProducts();
+  const database = await initDatabase();
+  const result = database.exec('SELECT * FROM products ORDER BY created_at DESC');
+  
+  if (!result[0]) return [];
+
+  const { columns, values } = result[0];
+  const products = values.map(row => {
+    const product: any = {};
+    columns.forEach((col, i) => {
+      if (col === 'ingredients' && row[i]) {
+        product[col] = JSON.parse(row[i] as string);
+      } else if (col === 'available') {
+        product[col] = !!row[i];
+      } else {
+        product[col] = row[i];
+      }
+    });
+    return product;
+  });
+
+  return products;
 };
 
 export const createProduct = async (product: any) => {
-  const products = getLocalProducts();
-  const newProduct = {
-    ...product,
-    id: Date.now().toString(), // Simple unique ID
-  };
-  const updated = [...products, newProduct];
-  saveLocalProducts(updated);
+  const database = await initDatabase();
+  const id = Date.now().toString();
+  const newProduct = { ...product, id };
+
+  const stmt = database.prepare(`
+    INSERT INTO products (id, name, description, price, category, image, available, ingredients)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  stmt.run([
+    id,
+    product.name,
+    product.description || null,
+    product.price,
+    product.category,
+    product.image || null,
+    product.available ? 1 : 0,
+    product.ingredients ? JSON.stringify(product.ingredients) : null
+  ]);
+  stmt.free();
+
+  saveDatabase();
   return newProduct;
 };
 
 export const updateProduct = async (id: string, updates: any) => {
-  const products = getLocalProducts();
-  const index = products.findIndex(p => p.id === id);
-  if (index !== -1) {
-    products[index] = { ...products[index], ...updates };
-    saveLocalProducts(products);
-    return products[index];
-  }
-  throw new Error('Product not found');
+  const database = await initDatabase();
+
+  // Build dynamic update query
+  const setClauses: string[] = [];
+  const values: any[] = [];
+
+  Object.entries(updates).forEach(([key, value]) => {
+    if (key === 'ingredients') {
+      setClauses.push(`${key} = ?`);
+      values.push(value ? JSON.stringify(value) : null);
+    } else if (key === 'available') {
+      setClauses.push(`${key} = ?`);
+      values.push(value ? 1 : 0);
+    } else {
+      setClauses.push(`${key} = ?`);
+      values.push(value);
+    }
+  });
+
+  if (setClauses.length === 0) throw new Error('No updates provided');
+
+  values.push(id);
+
+  const stmt = database.prepare(`
+    UPDATE products
+    SET ${setClauses.join(', ')}
+    WHERE id = ?
+  `);
+
+  stmt.run(values);
+  stmt.free();
+  saveDatabase();
+
+  // Get updated product
+  const products = await getProducts();
+  const updatedProduct = products.find(p => p.id === id);
+  if (!updatedProduct) throw new Error('Product not found');
+  return updatedProduct;
 };
 
 export const deleteProduct = async (id: string) => {
-  const products = getLocalProducts();
-  const updated = products.filter(p => p.id !== id);
-  saveLocalProducts(updated);
+  const database = await initDatabase();
+  const stmt = database.prepare('DELETE FROM products WHERE id = ?');
+  stmt.run([id]);
+  stmt.free();
+  saveDatabase();
   return true;
 };
 
 // ============== IMAGE UPLOAD (Use placeholder for demo) ==============
 export const uploadImage = async (file: File) => {
-  // For demo, use a placeholder image based on file name
   return {
     url: `https://picsum.photos/seed/${file.name}/400/300`,
   };
@@ -115,7 +224,6 @@ export const uploadImage = async (file: File) => {
 
 // ============== CATEGORIES API ==================
 export const getCategories = async () => {
-  // Static categories based on our menu
   return [
     { name: "قهوة ساخنة" },
     { name: "شاي ومشروبات عشبية" },
@@ -126,6 +234,5 @@ export const getCategories = async () => {
 };
 
 export const createCategory = async (name: string) => {
-  // Demo: just return the category
   return { name };
 };
