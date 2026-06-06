@@ -203,16 +203,16 @@ export default function Home() {
             {/* Company Logo */}
             <div className="mb-8 flex justify-center">
               <div className="p-4 bg-[#12100E] rounded-full shadow-[0_0_40px_rgba(255,68,68,0.3)]">
-                {/* Wanwir Logo SVG (Exact Match from User Image with W) */}
+                {/* Wanwir Logo SVG (Clear W Shape) */}
                 <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                   {/* Outer Circle */}
                   <circle cx="50" cy="50" r="48" stroke="#ff4444" strokeWidth="4" fill="#12100E"/>
                   {/* Inner Circle */}
                   <circle cx="50" cy="50" r="32" stroke="#ff4444" strokeWidth="4" fill="none"/>
-                  {/* W Shape (White) */}
-                  <path d="M28 40 L38 70 L50 50 L62 70 L72 40" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                  {/* Red Middle Part */}
-                  <path d="M38 70 L50 58 L62 70" stroke="#ff4444" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                  {/* Clear W Shape (White) */}
+                  <path d="M25 35 L35 65 L50 45 L65 65 L75 35" stroke="white" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                  {/* Red Middle Part for W */}
+                  <path d="M35 65 L50 53 L65 65" stroke="#ff4444" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                 </svg>
               </div>
             </div>
